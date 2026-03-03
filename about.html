@@ -7,11 +7,31 @@
   <title>About Us - Arab Innovation Network</title>
   <link rel="stylesheet" href="/assets/css/about.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header id="site-header"></header>
-  <script src="assets/js/header.js"></script>
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo" aria-label="Arab Innovation Network home">
+      <img src="/components/AINLogo-2.png" alt="AIN" />
+    </a>
+    <nav class="main-nav nav" id="site-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/events.html">Events</a></li>
+        <li><a href="/contactus.html">Contact Us</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="true">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
   
   <!-- Header Banner -->
   <section class="header-banner">
@@ -398,8 +418,48 @@
   </div>
 
   <script src="/assets/js/about.js"></script>
-  <footer id="site-footer"></footer>
-  <script src="assets/js/footer.js"></script>
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-brand">
+      <a href="/" class="logo" aria-label="Arab Innovation Network home">
+        <img src="/components/AINLogo-2.png" alt="AIN" />
+      </a>
+      <p>Arab Innovation Network</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/events.html">Events</a></li>
+        <li><a href="/contactus.html">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-meta">
+      <p>
+        <span id="year"></span> © Arab Innovation Network. All rights reserved.
+      </p>
+      <p class="meta-links">
+        <a href="/privacy.html">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="/terms.html">Terms</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Auto-update year in footer
+  (function () {
+    var y = document.getElementById('year');
+    if (y) {
+      y.textContent = new Date().getFullYear();
+    }
+  })();
+</script>
+
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="icon" href="images/AIN/ain.png" type="image/x-icon">
     <meta charset="UTF-8">
@@ -7,617 +7,35 @@
     <title>Arab Innovation Network</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>
-        .bottom-slider {
-            padding: 2rem 0;
-            background: white;
-        }
-
-        .slider-container {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .slider-track {
-            display: flex;
-            gap: 1rem;
-            animation: slideBottom 25s linear infinite;
-            cursor: pointer;
-            width: max-content;
-
-        }
-
-
-        .slider-track:hover {
-            animation-play-state: paused;
-        }
-
-        .slider-item {
-            flex: 0 0 auto;
-            width: 100px;
-            height: 80px;
-            border-radius: 12px;
-            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #31b2cc;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .slider-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-
-        @keyframes slideBottom {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .slider-track {
-            animation: slideBottom 15s linear infinite;
-        }
-
-    </style>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: white;
-            color: #31b2cc;
-            overflow-x: hidden;
-        }
-
-        .section-title {
-            font-family: 'Baloo 2', cursive;
-            font-size: 2rem;
-            font-weight: 800;
-            color: #31b2cc;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-
-        /* Header with Logo and Navigation */
-        .header {
-            background: linear-gradient(135deg, #31b2cc 0%, #31b2cc 100%);
-            color: white;
-            padding: 1rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #31b2cc;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: #31b2cc;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Innovation Showcase */
-        .innovation-showcase {
-            padding: 4rem 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #31b2cc;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #31b2cc, #31b2cc);
-            border-radius: 2px;
-        }
-
-        .showcase-slider {
-            position: relative;
-            overflow: hidden;
-            max-width: 1200px;
-            margin: 0 auto;
-            height: 200px;
-        }
-
-        .showcase-track {
-            display: flex;
-            gap: 2rem;
-            animation: scroll 20s linear infinite;
-            width: calc(300px * 20);
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .showcase-item {
-            min-width: 280px;
-            height: 160px;
-            background: linear-gradient(135deg, #31b2cc, #31b2cc);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            box-shadow: 0 8px 25px rgb(45, 111, 120);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .showcase-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-        }
-
-        .showcase-item:hover::before {
-            animation: shine 0.6s ease;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        /* Images Gallery */
-        .gallery {
-            padding: 4rem 0;
-            background: #f8f9ff;
-        }
-
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-item {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
-
-        .gallery-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #31b2cc;
-        }
-
-        .gallery-content {
-            padding: 1.5rem;
-        }
-
-        .gallery-title {
-            font-size: 1.3rem;
-            color: #31b2cc;
-            margin-bottom: 0.5rem;
-        }
-
-        .see-more-btn {
-            display: block;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 2px solid #31b2cc;
-            color: #31b2cc;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .see-more-btn:hover {
-            background: #31b2cc;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* Advertisements */
-        .ads-section {
-            padding: 4rem 0;
-            background: white;
-        }
-
-        .ads-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .ad-card {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ad-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(49,178,204,0.1), transparent);
-            transition: all 0.6s ease;
-        }
-
-        .ad-card:hover::before {
-            left: 100%;
-        }
-
-        .ad-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        }
-
-        .ad-icon {
-            width: 60px;
-            height: 60px;
-            background: #31b2cc;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .ad-main-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-
-        .bottom-slider {
-            padding: 2rem 0;
-            background: white;
-        }
-
-        .slider-container {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .slider-track {
-            width: max-content;
-            display: flex;
-            gap: 1rem;
-            animation: slideBottom 60s linear infinite;
-        }
-
-        @keyframes slideBottom {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .slider-track.animate {
-            animation: slideBottom 20s linear infinite;
-        }
-        .slider-item {
-            min-width: 100px;
-            height: 80px;
-            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #31b2cc;
-            font-size: 1.5rem;
-        }
-
-
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 0.8;
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .ads-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-
-        }
-
-
-        .bottom-slider {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .slider-container {
-            width: 100%;
-        }
-
-        .slider-track {
-            display: flex;
-            gap: 10px;
-            width: max-content;
-        }
-
-        .slider-item img {
-            display: block;
-            cursor: pointer;
-        }
-
-
-
-        .ad-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .ad-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            margin-top: 0.5rem;
-            border-radius: 8px;
-        }
-
-
-        .team-section {
-            padding: 4rem 2rem;
-            background: #f8f9ff;
-        }
-        .team-container {
-            display: flex;
-            align-items: center;
-        }
-        .team-track {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 1rem;
-            scrollbar-width: none;
-        }
-        .team-track::-webkit-scrollbar {
-            display: none;
-        }
-        .team-member {
-            flex: 0 0 200px;
-        }
-        .member-card {
-            width: 300px;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.3s;
-        }
-        .member-card img {
-            width: 100%;
-            height: 300px;
-            border-radius: 15px;
-            object-fit: cover;
-            transition: transform 0.3s, filter 0.3s;
-        }
-        .member-card:hover img {
-            transform: scale(1.1);
-        }
-        .member-text {
-            margin-top: 0.5rem;
-        }
-        .member-text h3 {
-            margin: 0;
-            font-size: 1rem;
-            color: #333;
-        }
-        .member-text p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #666;
-        }
-        .member-card:hover .overlay {
-            opacity: 1;
-        }
-        .team-arrow {
-            background: #31b2cc;
-            color: white;
-            border: none;
-            font-size: 2rem;
-            padding: 0 0.8rem;
-            border-radius: 50%;
-            cursor: pointer;
-            margin: 0 3rem;
-            transition: background 0.3s;
-        }
-        .team-arrow:hover {
-            background: #31b2cc;
-        }
-
-    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!-- Header -->
-<header id="site-header"></header>
-<script src="assets/js/header.js"></script>
 
-    
-<section class="top-images">
-    <!-- النص فوق الصور -->
+<header class="site-header">
+    <div class="container">
+        <a href="/index.html" class="logo" aria-label="Arab Innovation Network home">
+            <img src="/components/AINLogo-2.png" alt="AIN" />
+        </a>
+        <nav class="main-nav nav" id="site-nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/about.html">About Us</a></li>
+                <li><a href="/events.html">Events</a></li>
+                <li><a href="/contactus.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="true">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+</header>
+
+<!-- Top Images Section -->
+<section class="top-images reveal">
     <div class="overlay-text">
         <h2>AIN<br>Arabc Innovation University An-Najah National </h2>
     </div>
@@ -684,7 +102,6 @@
                 <img src="images/AIN/ph1.png" alt="">
                 <img src="images/AIN/ph2.png" alt="">
                 <img src="images/AIN/ph3.png" alt="">
-
             </div>
             <div class="images">
                 <img src="images/AIN/ph9.png" alt="">
@@ -720,87 +137,16 @@
                 <img src="images/AIN/ph26.png" alt="">
                 <img src="images/AIN/ph27.png" alt="">
                 <img src="images/AIN/ph24.png" alt="">
-
             </div>
         </div>
     </div>
-
 </section>
-<style>
-    .top-images {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        overflow: hidden;
-    }
 
-    .overlay-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        text-align: center;
-        color: white;
-        font-size: 2rem;
-        font-weight: bold;
-        line-height: 1.4;
-        width: 90%;
-    }
-
-    .image-row {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .track {
-        display: flex;
-        width: max-content;
-    }
-
-    .images {
-        display: flex;
-        gap: 0;
-    }
-
-    .images img {
-        width: 200px;
-        height: 150px;
-        object-fit: cover;
-        flex-shrink: 0;
-        filter: brightness(70%);
-        border-radius: 0;
-    }
-
-
-    /* Animations */
-    .left .track {
-        animation: scroll-left 30s linear infinite;
-    }
-
-    .right .track {
-        animation: scroll-right 30s linear infinite;
-    }
-
-    @keyframes scroll-left {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-
-    @keyframes scroll-right {
-        0% { transform: translateX(-50%); }
-        100% { transform: translateX(0); }
-    }
-</style>
-<!-- hamza link	-->
-
-<!-- Advertisements -->
-<section class="ads-section">
+<!-- Advertisements Section -->
+<section class="ads-section reveal">
     <div class="section-title">Our Achievements</div>
     <div class="ads-grid">
-
-        <a href="events.html?event=hackathon"  class="ad-link">
+        <a href="events.html?event=hackathon" class="ad-link">
             <div class="ad-card">
                 <img src="images/image-about/Hackathon.jpg" alt="Hackathon" class="ad-main-image">
                 <h3>هاكاثون</h3>
@@ -808,7 +154,7 @@
             </div>
         </a>
 
-        <a href="events.html?event=camp"  class="ad-link">
+        <a href="events.html?event=camp" class="ad-link">
             <div class="ad-card">
                 <img src="images/image-about/EOY.jpg" alt="Camp" class="ad-main-image">
                 <h3>مخيم عينك على ذاتك</h3>
@@ -816,150 +162,41 @@
             </div>
         </a>
 
-        <a href="events.html?event=exhibition"  class="ad-link">
+        <a href="events.html?event=exhibition" class="ad-link">
             <div class="ad-card">
                 <img src="images/image-about/Exhibition.jpg" alt="Exhibition" class="ad-main-image">
                 <h3>معرض عين على المستقبل</h3>
                 <p>Showcasing future innovations</p>
             </div>
         </a>
-
     </div>
 </section>
 
-<style>
-    .ad-link {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .ad-link:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        cursor: pointer;
-    }
-</style>
 <!-- Comments Section -->
-<section class="comments-section">
+<section class="comments-section reveal">
     <h2 class="section-title">Popular Comments</h2>
     <div class="comments-grid">
         <div class="comment-card from-right">
             <img src="/images/1.jpg" height="100" width="500" />
         </div>
         <div class="comment-card from-right">
-
             <img src="/comments/com2.png"/>
-       </div>
+        </div>
         <div class="comment-card from-left">
-
             <img src="/comments/com3.png" />
         </div>
         <div class="comment-card from-left">
-
             <img src="/comments/com4.png" />
-      </div>
+        </div>
     </div>
 </section>
 
-<style>
-    .comments-section {
-        padding: 4rem 2rem;
-        background: #f9fafc;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .section-title {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 2rem;
-        color: #222;
-    }
-
-    .comments-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-    }
-
-    .comment-card {
-        background: #fff;
-        border-radius: 15px;
-        padding: 1rem;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        text-align: center;
-        opacity: 0;
-        transform: translateX(0);
-        transition: transform 1.5s ease, opacity 1.5s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .comment-card img {
-        width: 100%;
-        height: auto;
-        max-width: 100%;
-        object-fit: cover;
-        border-radius: 12px;
-    }
-
-
-
-    .comment-card p {
-        font-size: 1rem;
-        color: #444;
-        line-height: 1.5;
-    }
-
-    .from-left {
-        transform: translateX(-100vw);
-    }
-
-    .from-right {
-        transform: translateX(100vw);
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.comment-card');
-
-        function handleScroll() {
-            const triggerBottom = window.innerHeight * 0.9;
-
-            cards.forEach((card, index) => {
-                const cardTop = card.getBoundingClientRect().top;
-
-                if (cardTop < triggerBottom && cardTop > 0) {
-                    card.style.transform = 'translateX(0)';
-                    card.style.opacity = 1;
-                } else {
-                    if (index < 2) {
-                        card.style.transform = 'translateX(100vw)';
-                    } else {
-                        card.style.transform = 'translateX(-100vw)';
-                    }
-                    card.style.opacity = 0;
-                }
-            });
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
-        handleScroll();
-    });
-</script>
-
-<section class="team-section">
+<!-- Team Section -->
+<section class="team-section reveal">
     <h2 class="section-title">Our Team</h2>
     <div class="team-container">
         <button class="team-arrow" id="prevTeam">‹</button>
         <div class="team-track">
-
             <!-- 1. President -->
             <div class="team-member">
                 <a href="about.html#member-0" class="member-link">
@@ -1077,7 +314,6 @@
                 </a>
             </div>
 
-
             <div class="team-member">
                 <a href="about.html#member-11" class="member-link">
                     <div class="member-card">
@@ -1113,32 +349,16 @@
                     </div>
                 </a>
             </div>
-
         </div>
         <button class="team-arrow" id="nextTeam">›</button>
     </div>
 </section>
 
-<style>.member-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.member-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    cursor: pointer;
-}
-</style>
-
-
 <div class="section-spacer"></div>
 <div class="section-spacer"></div>
 
-
-<section class="association-section" dir="rtl">
+<!-- Association Section (Questions) -->
+<section class="association-section reveal" dir="rtl">
     <h2 class="section-title">📌 Most popular questions about AIN</h2>
 
     <div class="questions-grid">
@@ -1180,444 +400,119 @@
     <div style="text-align:center; margin: 1.5rem 0;">
     </div>
 
-
     <div style="text-align:center; margin: 1.5rem 0;">
         <button id="toggleBtn" class="btn-primary">Show more</button>
     </div>
 </section>
 
-<script>
-    document.querySelectorAll('.question-card').forEach(card => {
-        card.addEventListener('click', () => {
-            card.classList.toggle('active');
-        });
-    });
-
-    const toggleBtn = document.getElementById('toggleBtn');
-    const extras = document.querySelectorAll('.question-card.extra');
-
-    let isShown = false;
-
-    toggleBtn.addEventListener('click', () => {
-        if (!isShown) {
-            extras.forEach(e => e.style.display = 'block');
-            toggleBtn.textContent = "Hide";
-        } else {
-            extras.forEach(e => e.style.display = 'none');
-            toggleBtn.textContent = "Show more";
-        }
-        isShown = !isShown;
-    });
-</script>
-
-<style>
-    .association-section {
-        padding: 1.5rem 1rem;
-        background: linear-gradient(to bottom, #ffffff, #ffffff);
-        border-radius: 20px;
-        max-width: 1100px;
-        margin: 2rem auto;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    }
-
-    .section-title {
-        text-align: center;
-        font-size: 1.8rem;
-        font-weight: 900;
-        color: #000000;
-        margin-bottom: 1.5rem;
-        font-family: 'Cairo', sans-serif;
-    }
-
-    .questions-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1rem;
-    }
-
-    .question-card {
-        background: #ffffff;
-        border-radius: 18px;
-        padding: 1rem 0.8rem;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-        cursor: pointer;
-        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .question-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-        background: #f9faff;
-    }
-
-    .question {
-        font-weight: 700;
-        font-size: 1.05rem;
-        color: #000000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: 'Cairo', sans-serif;
-    }
-
-    .arrow {
-        color: rgb(2, 182, 237);
-        font-size: 1.1rem;
-        transition: transform 0.35s ease;
-    }
-
-    .question-card.active .arrow {
-        transform: rotate(180deg);
-    }
-
-    .answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.35s ease, padding 0.35s ease;
-        font-size: 0.95rem;
-        line-height: 1.4;
-        padding-left: 0.5rem;
-        color: #333;
-    }
-
-    .question-card.active .answer {
-        max-height: 450px;
-        margin-top: 0.5rem;
-    }
-
-    .section-spacer {
-        height: 30px;
-    }
-
-    .question::first-letter {
-        color: #31b2cc;
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
-
-    .btn-primary {
-        display: inline-block;
-        background: #31b2cc;
-        color: #fff;
-        padding: 0.5rem 1.2rem;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.9rem;
-        transition: background 0.3s ease, transform 0.3s ease;
-        margin-top: 1rem;
-    }
-
-    .btn-primary:hover {
-        background: #02b6ed;
-        transform: scale(1.05);
-    }
-
-    @media (max-width: 768px) {
-        .section-title {
-            font-size: 1.5rem;
-        }
-        .question-card {
-            padding: 0.8rem 0.6rem;
-        }
-        .questions-grid {
-            grid-template-columns: 1fr;
-            gap: 0.8rem;
-        }
-    }
-</style>
-
-<section class="bottom-slider">
+<!-- Bottom Slider (Discounts) -->
+<section class="bottom-slider ">
     <div class="slider-container">
         <h2 class="section-title">AIN Discounts</h2>
         <div class="slider-track">
-
-
-            <style>.discount-popup .ticket-box {
-                direction: rtl;
-                unicode-bidi: plaintext;
-            }
-            </style>
-
-
-
             <div class="slider-item" data-text="خصم 20% على المنيو (غير شامل العروض)"><img src="images/icon/icon1.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 10% على البرجر فقط "><img src="images/icon/icon2.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 10 شيقل على التذكرة"><img src="images/icon/icon3.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 20% على المنيو"><img src="images/icon/icon4.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم %15"><img src="images/icon/icon5.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 15% لا تشمل المفاصلة الشخصية"><img src="images/icon/icon6.png" height="80" width="100"/></div>
-
-
-            <div class="slider-item"
-                 data-text="تفاصيل الخصم :"
-                 data-popup-image="images/icon/o.png">
+            <div class="slider-item" data-text="تفاصيل الخصم :" data-popup-image="images/icon/o.png">
                 <img src="images/icon/icon36.png" alt="" height="80" width="100">
             </div>
-
-
-
             <div class="slider-item" data-text="خصم 20% على المنيو"><img src="images/icon/icon7.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم %10"><img src="images/icon/icon8.png" height="80" width="100"/></div>
-            <div class="slider-item" data-text="وجبة الزنجر أو الفاهيتا
-20 شيقل بدل 25"><img src="images/icon/icon9.png" height="80" width="100"/></div>
+            <div class="slider-item" data-text="وجبة الزنجر أو الفاهيتا 20 شيقل بدل 25"><img src="images/icon/icon9.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 10%"><img src="images/icon/icon10.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 15%"><img src="images/icon/icon11.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 20% لا تشمل المفاصلة الشخصية"><img src="images/icon/icon12.png" height="80" width="100"/></div>
-
-
-            <div class="slider-item" data-text="            خصم 30% على الموقع كود الخصم AIN25
-"><img src="images/icon/icon13.png" height="80" width="100"/></div>
+            <div class="slider-item" data-text="خصم 30% على الموقع كود الخصم AIN25"><img src="images/icon/icon13.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 10% على الوجبات الفردية"><img src="images/icon/icon14.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 15% على الموقع الالكتروني غير شامل التوصيل كود الخصم AIN26"><img src="images/icon/icon15.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 20% على المنيو"><img src="images/icon/icon16.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="عروض متجددة خاصة بجمعية عين تعرض على صفحة الصالون"><img src="images/icon/icon17.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 15%"><img src="images/icon/icon18.png" height="80" width="100"/></div>
-
             <div class="slider-item" data-text="بيتزا لارج سعرها 45 بدل 60 أو 70 شيقل "><img src="images/icon/icon19.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="بيع المفرق بسعر الجملة"><img src="images/icon/icon20.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 20% على الفاتورة فوق 50 شيقل"><img src="images/icon/icon21.png" height="80" width="110"/></div>
             <div class="slider-item" data-text="تقديم استشارة مجانية للشعر والبشرة خصم 10% على الطلبات فوق 150 شيقل وخصم 15% على الطلبات فوق 300 شيقل"><img src="images/icon/icon22.png" height="80" width="110"/></div>
             <div class="slider-item" data-text="خصم 10%"><img src="images/icon/icon23.png" height="80" width="110"/></div>
             <div class="slider-item" data-text="خصم 25% على الفاتورة فوق 50 شيقل غير شامل العروض"><img src="images/icon/icon24.png" height="80" width="110"/></div>
-
-
             <div class="slider-item" data-text="خصم 15% "><img src="images/icon/icon25.png" height="80" width="110"/></div>
             <div class="slider-item" data-text="خصم 15% على المنيو"><img src="images/icon/icon26.png" height="80" width="110"/></div>
             <div class="slider-item" data-text="خصم 20% فقط على الإكسسوارات"><img src="images/icon/icon27.png" height="80" width="110"/></div>
-            <div class="slider-item"
-                 data-text="‏%10 على المنيو Takeaway  %20 على المنيو Lounge بالفرعين">
+            <div class="slider-item" data-text="‏%10 على المنيو Takeaway %20 على المنيو Lounge بالفرعين">
                 <img src="images/icon/icon28.png" height="80" width="110"/>
             </div>
             <div class="slider-item" data-text="خصم 20%"><img src="images/icon/icon29.png" height="80" width="110"/></div>
             <div class="slider-item" data-text="خصم %10-5"><img src="images/icon/icon30.png" height="80" width="100"/></div>
             <div class="slider-item" data-text=" خصم 20% على القطع المشغولة "><img src="images/icon/icon31.png" height="80" width="100"/></div>
-
-
-
-            <div class="slider-item" data-text="بيتزا سمول + ميني كولا =20 شيقل
-            بيتزا لارج+بطاطا+كولا= 50 شيقل
-            بيتزا ميديوم+بطاطا= 30 شيقل
-"><img src="images/icon/icon32.png" height="80" width="100"/></div>
+            <div class="slider-item" data-text="بيتزا سمول + ميني كولا =20 شيقل بيتزا لارج+بطاطا+كولا= 50 شيقل بيتزا ميديوم+بطاطا= 30 شيقل"><img src="images/icon/icon32.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 30% على الفاتورة فوق 50 شيقل غير شامل العروض"><img src="images/icon/icon33.png" height="80" width="100"/></div>
-            <div class="slider-item" data-text="خصم 5%
-            غير شامل البكجات
-            والعروضات
-"><img src="images/icon/icon34.png" height="80" width="100"/></div>
+            <div class="slider-item" data-text="خصم 5% غير شامل البكجات والعروضات"><img src="images/icon/icon34.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="خصم 10%"><img src="images/icon/icon35.png" height="80" width="100"/></div>
-
-
             <div class="slider-item" data-text="خصم 20% على المنيو"><img src="images/icon/icon37.png" height="80" width="100"/></div>
-            <div class="slider-item" data-text="بروتين وزيت هندي
-    20% شعر طويل
-    10% شعر قصير"><img src="images/icon/icon38.png" height="80" width="100"/></div>
+            <div class="slider-item" data-text="بروتين وزيت هندي 20% شعر طويل 10% شعر قصير"><img src="images/icon/icon38.png" height="80" width="100"/></div>
             <div class="slider-item" data-text="%خصم 10 "><img src="images/icon/icon39.png" height="80" width="100"/></div>
-            <div class="slider-item"
-                 data-text="خصم 40% على Skechers خصم 30% على Charcoal">
+            <div class="slider-item" data-text="خصم 40% على Skechers خصم 30% على Charcoal">
                 <img src="images/icon/icon40.png" height="80" width="100"/>
             </div>
-
             <div class="slider-item" data-text="خصم 30% لا تشمل المفاصلة الشخصية"><img src="images/icon/icon41.png" height="80" width="100"/></div>
-            <div class="slider-item" data-text="عرض على الحلاقة والسشوار
-وتنظيف البشرة
-90 شيقل بدل 150"><img src="images/icon/icon42.png" height="80" width="100"/></div>
-
-
+            <div class="slider-item" data-text="عرض على الحلاقة والسشوار وتنظيف البشرة 90 شيقل بدل 150"><img src="images/icon/icon42.png" height="80" width="100"/></div>
         </div>
     </div>
-
-
 </section>
 
-<style>
-    /* ===== Popup Overlay ===== */
-    .discount-popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        background: #31b2cc;
-        padding: 15px;
-        border-radius: 15px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-        z-index: 10000;
-        text-align: center;
-        width: 250px;
-        max-width: 90%;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease;
-    }
-    .discount-popup.active {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    .discount-popup img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-    .discount-popup .ticket-box {
-        background: #f8f8f8;
-        padding: 12px;
-        border-radius: 10px;
-        font-size: 1rem;
-        color: #333;
-        line-height: 1.5;
-        font-weight: bold;
-    }
-</style>
-
+<!-- Discount Popup -->
 <div class="discount-popup" id="discountPopup">
     <img id="popupImage" src="" alt="Store Image">
     <div class="ticket-box" id="popupText"></div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById("discountPopup");
-        const popupImage = document.getElementById("popupImage");
-        const popupText = document.getElementById("popupText");
-        const sliderTrack = document.querySelector('.slider-track');
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-brand">
+            <a href="/" class="logo" aria-label="Arab Innovation Network home">
+                <img src="/components/AINLogo-2.png" alt="AIN" />
+            </a>
+            <p>Arab Innovation Network</p>
+        </div>
 
-        const trackItems = [...sliderTrack.children];
-        trackItems.forEach(item => sliderTrack.appendChild(item.cloneNode(true)));
+        <nav class="footer-nav" aria-label="Footer">
+            <ul>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/activities.html">Activities</a></li>
+                <li><a href="/societies.html">Societies</a></li>
+                <li><a href="/sponsorship.html">Sponsorship</a></li>
+                <li><a href="/gallery.html">Gallery</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
 
-        function bindPopupEvents(items) {
-            items.forEach(item => {
-                item.addEventListener("mouseenter", () => {
-                    const text = item.getAttribute("data-text");
-                    const popupImg = item.getAttribute("data-popup-image"); // ← الصورة الجديدة
-                    const img = popupImg || item.getAttribute("data-image") || item.querySelector("img").getAttribute("src");
-
-                    popupText.style.display = "none";
-                    popupImage.style.display = "none";
-
-                    if (text) {
-                        popupText.textContent = text;
-                        popupText.style.display = "block";
-                    }
-
-                    if (img) {
-                        popupImage.setAttribute("src", img);
-                        popupImage.style.display = "block";
-                    }
-
-                    popup.classList.add("active");
-                });
-
-                item.addEventListener("mouseleave", () => {
-                    popup.classList.remove("active");
-                });
-            });
-        }
-
-        bindPopupEvents([...sliderTrack.children]);
-
-        const sliderItemWidth = trackItems[0].offsetWidth + 10;
-        const totalItems = trackItems.length;
-        let offset = 0;
-
-        function animateLoop() {
-            offset += 0.15;
-            if (offset >= totalItems * sliderItemWidth / 2) offset = 0;
-            sliderTrack.style.transform = `translateX(-${offset}px)`;
-            requestAnimationFrame(animateLoop);
-        }
-        animateLoop();
-    });
-</script>
+        <div class="footer-meta">
+            <p>
+                <span id="year"></span> © Arab Innovation Network. All rights reserved.
+            </p>
+            <p class="meta-links">
+                <a href="/privacy.html">Privacy</a>
+                <span aria-hidden="true">·</span>
+                <a href="/terms.html">Terms</a>
+            </p>
+        </div>
+    </div>
+</footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('discount-popup');
-        const sliderItems = document.querySelectorAll('.slider-item');
-
-        sliderItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const text = item.dataset.text;
-                if (text) {
-
-                    const rect = item.getBoundingClientRect();
-                    const iconX = rect.left + rect.width / 2;
-                    const iconY = rect.top + rect.height / 2;
-
-                }
-            });
-
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('discount-popup');
-        const sliderTrack = document.querySelector('.slider-track');
-        const items = document.querySelectorAll('.slider-item');
-
-        items.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const text = item.dataset.text;
-                if (text) {
-                    popup.textContent = text;
-
-                    popup.style.top = '50%';
-                    popup.style.left = '50%';
-                    popup.style.transform = 'translate(-50%, -50%)';
-                    popup.style.display = 'block';
-                    popup.style.opacity = 1;
-                    popup.style.pointerEvents = 'auto';
-                }
-            });
-
-            item.addEventListener('mouseleave', () => {
-                popup.style.opacity = 0;
-                popup.style.pointerEvents = 'none';
-                setTimeout(() => { popup.style.display = 'none'; }, 300);
-            });
-        });
-
-        const track = document.querySelector('.team-track');
-        const prevBtn = document.getElementById('prevTeam');
-        const nextBtn = document.getElementById('nextTeam');
-
-        const singleItem = track.querySelector('.team-member');
-        const itemWidth = singleItem.offsetWidth + 10;
-
-        const itemsPerScroll = 3;
-        const scrollAmount = itemWidth * itemsPerScroll;
-
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-
-        const trackItems = [...sliderTrack.children];
-        const sliderItemWidth = trackItems[0].offsetWidth + 10;
-        const totalItems = trackItems.length;
-
-        trackItems.forEach(item => sliderTrack.appendChild(item.cloneNode(true)));
-
-        let offset = 0;
-        function animateLoop() {
-            offset += 0.15;
-            if (offset >= totalItems * sliderItemWidth / 2) offset = 0;
-            sliderTrack.style.transform = `translateX(-${offset}px)`;
-            requestAnimationFrame(animateLoop);
+    // Auto-update year in footer
+    (function () {
+        var y = document.getElementById('year');
+        if (y) {
+            y.textContent = new Date().getFullYear();
         }
-        animateLoop();
-    });
-
+    })();
 </script>
 
-<footer id="site-footer"></footer>
-<script src="assets/js/footer.js"></script>
+<!-- Main Script File -->
+<script src="script.js"></script>
 </body>
 </html>
