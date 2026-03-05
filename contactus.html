@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="images/AIN/ain.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Arab Innovation</title>
     <link rel="stylesheet" href="/assets/css/contact.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
+    <link rel="stylesheet" href="/styles.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        (function(){
+        (function () {
             emailjs.init({
                 publicKey: "1fmz9EiPklZhmgvWt",
             });
         })();
     </script>
 </head>
+
 <body>
-<!-- Header -->
-<header class="site-header">
-    <div class="container">
-        <a href="/" class="logo" aria-label="Arab Innovation Network home">
-            <img src="/components/AINLogo-2.png" alt="AIN" />
-        </a>
-        <nav class="main-nav nav" id="site-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="/about.html">About Us</a></li>
-                <li><a href="/events.html">Events</a></li>
-                <li><a href="/contactus.html">Contact Us</a></li>
-            </ul>
-        </nav>
-        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="true">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-    </div>
-</header>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="/index.html" class="logo" aria-label="Arab Innovation Network home">
+                <img src="/components/AINLogo-2.png" alt="AIN" />
+            </a>
+            <nav class="main-nav nav" id="site-nav">
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/events.html">Events</a></li>
+                    <li><a href="/contactus.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="true">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
     <div class="contact-container">
         <!-- Background Elements -->
         <div class="background-elements">
@@ -48,14 +51,14 @@
             <div class="bg-shape shape-2"></div>
             <div class="bg-shape shape-3"></div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="contact-content">
             <div class="contact-header">
                 <h1>Get In Touch</h1>
                 <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
             </div>
-            
+
             <div class="contact-body">
                 <div class="contact-info">
                     <div class="info-card">
@@ -65,7 +68,7 @@
                         <h3>Our Location</h3>
                         <p>Old An-Najah University Street, Nablus-Palestine</p>
                     </div>
-                    
+
                     <div class="info-card">
                         <div class="icon-circle">
                             <i class="fas fa-phone"></i>
@@ -73,7 +76,7 @@
                         <h3>Phone Number</h3>
                         <p>+970 598 317 517</p>
                     </div>
-                    
+
                     <div class="info-card">
                         <div class="icon-circle">
                             <i class="fas fa-envelope"></i>
@@ -81,7 +84,7 @@
                         <h3>Email Address</h3>
                         <p>ainannu@arabinnovation.net</p>
                     </div>
-                    
+
                     <div class="info-card">
                         <div class="icon-circle">
                             <i class="fas fa-clock"></i>
@@ -90,7 +93,7 @@
                         <p>Sun - Thu: 8:00 AM - 3:30 PM</p>
                     </div>
                 </div>
-                
+
                 <div class="contact-form-container">
                     <form id="contactForm" class="contact-form">
                         <div class="form-group">
@@ -101,7 +104,7 @@
                             </div>
                             <span class="error-message" id="nameError"></span>
                         </div>
-                        
+
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <i class="fas fa-envelope"></i>
@@ -111,7 +114,7 @@
                             </div>
                             <span class="error-message" id="emailError"></span>
                         </div>
-                        
+
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <i class="fas fa-tag"></i>
@@ -120,24 +123,24 @@
                             </div>
                             <span class="error-message" id="subjectError"></span>
                         </div>
-                        
+
                         <div class="form-group">
                             <div class="input-with-icon">
                                 <div class="comm">
-                                <i class="fas fa-comment"></i>
+                                    <i class="fas fa-comment"></i>
                                 </div>
                                 <textarea id="message" name="message" rows="5" required></textarea>
                                 <label for="message">Your Message</label>
                             </div>
                             <span class="error-message" id="messageError"></span>
                         </div>
-                        
+
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <span>Send Message</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </form>
-                    
+
                     <div id="successMessage" class="success-message">
                         <i class="fas fa-check-circle"></i>
                         <h3>Message Sent Successfully!</h3>
@@ -145,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Map Section -->
             <div class="map-section">
                 <div class="section-header">
@@ -167,11 +170,13 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Social Links -->
         <div class="social-links">
-            <a href="https://www.facebook.com/share/1CVmRErKEj/?mibextid=LQQJ4d" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/annuain?igsh=NjNmYzZmd3R4cW5j" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1CVmRErKEj/?mibextid=LQQJ4d" target="_blank" class="social-link"><i
+                    class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/annuain?igsh=NjNmYzZmd3R4cW5j" target="_blank" class="social-link"><i
+                    class="fab fa-instagram"></i></a>
         </div>
     </div>
 
@@ -188,7 +193,7 @@
                 <h2>Email Verification Required</h2>
                 <p>We need to verify your email address before sending your message</p>
             </div>
-            
+
             <div class="verification-body">
                 <div class="verification-progress">
                     <div class="progress-bar">
@@ -200,7 +205,7 @@
                         <span class="step">Verifying existence</span>
                     </div>
                 </div>
-                
+
                 <div class="verification-details">
                     <div class="detail-item">
                         <i class="fas fa-check-circle valid"></i>
@@ -228,7 +233,8 @@
                 <h3>Unable to Verify Email</h3>
             </div>
             <div class="error-body">
-                <p id="errorMessageText">The email address <strong id="enteredEmail"></strong> could not be verified.</p>
+                <p id="errorMessageText">The email address <strong id="enteredEmail"></strong> could not be verified.
+                </p>
                 <div class="error-suggestions">
                     <p><strong>Please consider:</strong></p>
                     <ul>
@@ -271,49 +277,50 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/js/contact.js"></script>
 
-<!-- Footer -->
-<footer class="site-footer">
-    <div class="container">
-        <div class="footer-brand">
-            <a href="/" class="logo" aria-label="Arab Innovation Network home">
-                <img src="/image/AINLogo-2.png" alt="AIN" />
-            </a>
-            <p>Arab Innovation Network</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-brand">
+                <a href="/" class="logo" aria-label="Arab Innovation Network home">
+                    <img src="/image/AINLogo-2.png" alt="AIN" />
+                </a>
+                <p>Arab Innovation Network</p>
+            </div>
+
+            <nav class="footer-nav" aria-label="Footer">
+                <ul>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/activities.html">Activities</a></li>
+                    <li><a href="/societies.html">Societies</a></li>
+                    <li><a href="/sponsorship.html">Sponsorship</a></li>
+                    <li><a href="/gallery.html">Gallery</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-meta">
+                <p>
+                    <span id="year"></span> © Arab Innovation Network. All rights reserved.
+                </p>
+                <p class="meta-links">
+                    <a href="/privacy.html">Privacy</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="/terms.html">Terms</a>
+                </p>
+            </div>
         </div>
+    </footer>
 
-        <nav class="footer-nav" aria-label="Footer">
-            <ul>
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/activities.html">Activities</a></li>
-                <li><a href="/societies.html">Societies</a></li>
-                <li><a href="/sponsorship.html">Sponsorship</a></li>
-                <li><a href="/gallery.html">Gallery</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-            </ul>
-        </nav>
-
-        <div class="footer-meta">
-            <p>
-                <span id="year"></span> © Arab Innovation Network. All rights reserved.
-            </p>
-            <p class="meta-links">
-                <a href="/privacy.html">Privacy</a>
-                <span aria-hidden="true">·</span>
-                <a href="/terms.html">Terms</a>
-            </p>
-        </div>
-    </div>
-</footer>
-
-<script>
-    // Auto-update year in footer
-    (function () {
-        var y = document.getElementById('year');
-        if (y) {
-            y.textContent = new Date().getFullYear();
-        }
-    })();
-</script>
+    <script>
+        // Auto-update year in footer
+        (function () {
+            var y = document.getElementById('year');
+            if (y) {
+                y.textContent = new Date().getFullYear();
+            }
+        })();
+    </script>
 
 </body>
+
 </html>
