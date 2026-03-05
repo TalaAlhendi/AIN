@@ -655,7 +655,8 @@ const initializePage = () => {
         3: { name: 'Dana Zaben', image: 'dana.jpg' },
         4: { name: 'Sadeel Daraghmeh', image: 'SadeelDaraghmeh.jpg' },
         5: { name: 'Hamza Abdulsalam', image: 'HamzaAbdulsalam.jpg' },
-        6: { name: 'Asmaa Abd Alhadi', image: 'AsmaaAbdAlhadi.jpg' }
+        6: { name: 'Asmaa Abd Alhadi', image: 'AsmaaAbdAlhadi.jpg' },
+        7: { name: 'Jana Abu Turabi', image: 'JanaAbuturabi.jpg' }
     };
 
     devImages.forEach((img, index) => {
@@ -681,9 +682,9 @@ const initializePage = () => {
     // إضافة الصور التوضيحية للمعرض
     const galleryImages = document.querySelectorAll('.gallery-image');
     const galleryImageUrls = [
-        'image/EOY.jpg',
-        'image/Exhibition.jpg',
-        'image/Hackathon.jpg'
+        'images/image-about/EOY.jpg',
+        'images/image-about/Exhibition.jpg',
+        'images/image-about/Hackathon.jpg'
     ];
 
     galleryImages.forEach((img, index) => {

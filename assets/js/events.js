@@ -1,401 +1,702 @@
-(function () {
-  const searchInput = document.getElementById("searchInput");
-  const upcomingGrid = document.getElementById("upcomingGrid");
-  const pastGrid = document.getElementById("pastGrid");
-  const brandBadge = document.getElementById("brandBadge");
+/**
+ * AIN Events Page — React Application
+ * Loaded via Babel Standalone (type="text/babel") from events.html
+ * React + ReactDOM are available as globals from CDN.
+ */
 
-  const allCards = () => [
-    ...Array.from(upcomingGrid.querySelectorAll(".card")),
-    ...Array.from(pastGrid.querySelectorAll(".card")),
+/* ────────────────────────────────────────────────────────────
+   DATA — Event Definitions
+   status: 'active' | 'upcoming' | 'past'
+──────────────────────────────────────────────────────────── */
+const EVENTS = [
+  {
+    id: 'hackathon-2025',
+    title: 'AIN Hackathon 2025',
+    date: '2025-12-01',
+    location: 'An-Najah University, Nablus',
+    status: 'active',
+    description: 'The flagship hackathon — 48 hours of ideas, code, and breakthrough innovation.',
+    fullDescription: 'Join teams of passionate students for a 48-hour sprint of building, prototyping, and pitching ideas that matter. Mentored by industry experts, judged by innovators, and witnessed by the entire AIN community.',
+    images: [
+      'https://picsum.photos/seed/hack1/1200/800',
+      'https://picsum.photos/seed/hack2/1200/800',
+      'https://picsum.photos/seed/hack3/1200/800',
+    ],
+    registrationLink: '/hack.html',
+    tags: ['Tech', 'Innovation', 'Competition'],
+    attendees: 200,
+  },
+  {
+    id: 'ain-camp-4',
+    title: 'AIN Camp 4',
+    titleAr: 'عينك على ذاتك',
+    date: '2026-01-15',
+    location: 'City Hub, Nablus',
+    status: 'upcoming',
+    description: 'An immersive self-development camp to unlock your inner potential.',
+    fullDescription: 'Three days of workshops, challenges, and reflection designed to inspire clarity of purpose and creative thinking in every participant.',
+    images: [
+      '/images/CAMP1.jpg',
+      '/images/CAMP2.jpg',
+      '/images/CAMP3.jpg',
+    ],
+    registrationLink: '/aincamp.html',
+    tags: ['Self-Development', 'Leadership'],
+  },
+  {
+    id: 'escape-2-ain',
+    title: 'ESCAPE 2 AIN',
+    date: '2025-10-11',
+    location: 'An-Najah University',
+    status: 'past',
+    description: 'An immersive escape-room experience celebrating creativity, teamwork, and fast thinking.',
+    fullDescription: '🧩 Escape To AIN 2 — رحلة البحث عن الجوهرة المفقودة. A fully themed campus escape game drawing more than 150 participants in a single day.',
+    extraDescription: 'Teams raced through four rooms of cryptic clues, logic puzzles, and hidden codes, each unlocking a piece of the story.',
+    images: ['/images/ESCP1.jpg', '/images/ESCP2.jpg', '/images/ESCP3.jpg'],
+    tags: ['Games', 'Teamwork'],
+    attendees: 150,
+  },
+  {
+    id: 'thirty-challenge',
+    title: 'تحدي الثلاثين',
+    date: '2025-08-16',
+    location: 'An-Najah University',
+    status: 'past',
+    description: 'A knowledge tournament with 30 competing teams across four rapid-fire rounds.',
+    fullDescription: 'نظّمت الشبكة العربية للابتكار (عين) فعالية تحدي الثلاثين — منافسة المعرفة والإبداع.',
+    images: ['/images/301.jpg', '/images/302.jpg', '/images/303.jpg'],
+    tags: ['Quiz', 'Competition'],
+    attendees: 140,
+  },
+  {
+    id: 'ain-exhibition-2025',
+    title: 'معرض عين على المستقبل',
+    date: '2025-05-20',
+    location: 'An-Najah University',
+    status: 'past',
+    description: 'An exploration of university majors and career paths, showcasing the breadth of innovation.',
+    fullDescription: 'معرض عين للتعريف عن التخصصات الجامعية وفرص المستقبل.',
+    images: ['/images/EXB1.jpg', '/images/EXB2.jpg', '/images/EXB3.jpg'],
+    tags: ['Exhibition', 'Careers'],
+  },
+  {
+    id: 'ain-camp-3',
+    title: 'مخيم عينك على ذاتك 3',
+    date: '2025-09-22',
+    location: 'City Hub',
+    status: 'past',
+    description: 'Third edition of the flagship self-development camp for AIN members.',
+    fullDescription: 'مخيم عينك على ذاتك 3 — النسخة الثالثة من المخيم التطويري الرائد لأعضاء عين.',
+    images: ['/images/CAMP1.jpg', '/images/CAMP4.jpg', '/images/CAMP5.jpg'],
+    tags: ['Self-Development'],
+  },
+  {
+    id: 'ain-network-exhibition',
+    title: 'معرض الشبكة العربية للابتكار',
+    date: '2025-04-22',
+    location: 'City Hub',
+    status: 'past',
+    description: 'Annual showcase of the Arab Innovation Network across Palestine.',
+    fullDescription: 'معرض الشبكة العربية للابتكار — عرض سنوي لمنجزات الشبكة في فلسطين.',
+    images: ['/images/EXB11.jpg', '/images/EXB12.jpg'],
+    tags: ['Exhibition', 'Network'],
+  },
+  {
+    id: 'wamdah',
+    title: 'ومضة',
+    date: '2025-03-15',
+    location: 'City Hub',
+    status: 'past',
+    description: 'Lightning talks — rapid 5-minute ideas from the brightest student innovators.',
+    fullDescription: 'ومضة: منصة أفكار سريعة ومُلهِمة من أبرز المبتكرين الطلابيين في فلسطين.',
+    images: ['/images/WAMDAH1.jpg', '/images/WAMDAH2.jpg'],
+    tags: ['Talks', 'Innovation'],
+  },
+];
+
+/* ─── Sorting utility ──────────────────────────────────────── */
+function sortEvents(events) {
+  const active = events.find(e => e.status === 'active') || null;
+  const upcoming = events.filter(e => e.status === 'upcoming')
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+  const past = events.filter(e => e.status === 'past')
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  return { active, upcoming, past };
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+
+/* ─── Hook: scroll reveal ──────────────────────────────────── */
+function useScrollReveal(ref) {
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const cards = ref.current.querySelectorAll('.evp-card');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(c => io.observe(c));
+    return () => io.disconnect();
+  }, []);
+}
+
+/* ─── Hook: auto slide timer ───────────────────────────────── */
+function useAutoSlide(count, interval, onNext, paused) {
+  const idxRef = React.useRef(0);
+  React.useEffect(() => {
+    if (count <= 1) return;
+    const timer = setInterval(() => {
+      if (!paused.current) {
+        idxRef.current = (idxRef.current + 1) % count;
+        onNext(idxRef.current);
+      }
+    }, interval);
+    return () => clearInterval(timer);
+  }, [count, interval]);
+
+  return idxRef;
+}
+
+/* ════════════════════════════════════════════════════════════
+   COMPONENT: EventDetailModal
+════════════════════════════════════════════════════════════ */
+function EventDetailModal({ event, onClose }) {
+  const [idx, setIdx] = React.useState(0);
+  const [paused, setPaused] = React.useState(false);
+  const pausedRef = React.useRef(false);
+  const imgs = event.images || [];
+  const count = imgs.length;
+
+  // Keep ref in sync with state (so interval closure sees current value)
+  React.useEffect(() => { pausedRef.current = paused; }, [paused]);
+
+  // Auto-slide
+  React.useEffect(() => {
+    if (count <= 1) return;
+    const t = setInterval(() => {
+      if (!pausedRef.current) {
+        setIdx(i => (i + 1) % count);
+      }
+    }, 4000);
+    return () => clearInterval(t);
+  }, [count]);
+
+  // Keyboard nav
+  React.useEffect(() => {
+    const h = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowRight') setIdx(i => (i + 1) % count);
+      if (e.key === 'ArrowLeft') setIdx(i => (i - 1 + count) % count);
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [count, onClose]);
+
+  // Lock body scroll
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  const isUpcoming = event.status === 'upcoming' || event.status === 'active';
+
+  return (
+    <div
+      className="evp-modal-backdrop"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Event details: ${event.title}`}
+    >
+      <div className="evp-modal" onClick={e => e.stopPropagation()}>
+
+        {/* ── LEFT: Slideshow ── */}
+        <div
+          className="evp-modal__slider"
+          onMouseDown={() => setPaused(true)}
+          onMouseUp={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
+          {imgs.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`${event.title} photo ${i + 1}`}
+              className={`evp-modal__img${i !== idx ? ' exiting' : ''}`}
+              style={{ zIndex: i === idx ? 2 : 1 }}
+            />
+          ))}
+
+          {/* Pause overlay */}
+          {paused && (
+            <div className="evp-pause-overlay">⏸</div>
+          )}
+
+          <span className="evp-modal__hint">🖱 Hold to pause</span>
+
+          {/* Arrows */}
+          {count > 1 && (
+            <>
+              <button
+                className="evp-arrow prev"
+                onClick={e => { e.stopPropagation(); setIdx(i => (i - 1 + count) % count); }}
+                aria-label="Previous photo"
+              >‹</button>
+              <button
+                className="evp-arrow next"
+                onClick={e => { e.stopPropagation(); setIdx(i => (i + 1) % count); }}
+                aria-label="Next photo"
+              >›</button>
+            </>
+          )}
+
+          {/* Dots */}
+          <div className="evp-dots">
+            {imgs.map((_, i) => (
+              <button
+                key={i}
+                className={`evp-dot${i === idx ? ' active' : ''}`}
+                onClick={e => { e.stopPropagation(); setIdx(i); }}
+                aria-label={`Go to photo ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Progress bar animates per slide */}
+          {count > 1 && !paused && (
+            <div
+              key={idx}
+              className="evp-progress-bar"
+              style={{
+                animation: 'evpProgressGrow 4s linear forwards',
+              }}
+            />
+          )}
+        </div>
+
+        {/* ── RIGHT: Details ── */}
+        <div className="evp-modal__details">
+          <div className="evp-modal__details-scroll">
+            <div className="evp-modal__head">
+              {event.tags && (
+                <div className="evp-modal__tags">
+                  {event.tags.map(t => (
+                    <span key={t} className="evp-card__tag">{t}</span>
+                  ))}
+                </div>
+              )}
+              <h2 className="evp-modal__title">{event.title}</h2>
+              <div className="evp-modal__meta">
+                <div className="evp-modal__meta-row">
+                  <span className="evp-meta-icon">📅</span>
+                  {fmtDate(event.date)}
+                </div>
+                <div className="evp-modal__meta-row">
+                  <span className="evp-meta-icon">📍</span>
+                  {event.location}
+                </div>
+                {event.attendees && (
+                  <div className="evp-modal__meta-row">
+                    <span className="evp-meta-icon">👥</span>
+                    {event.attendees}+ attendees
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="evp-modal__desc">
+              <p className="evp-modal__full-desc">{event.fullDescription || event.description}</p>
+              {event.extraDescription && (
+                <p className="evp-modal__extra-desc">{event.extraDescription}</p>
+              )}
+            </div>
+          </div>
+
+          {/* CTA */}
+          {isUpcoming && event.registrationLink && (
+            <div className="evp-modal__cta">
+              <a href={event.registrationLink} className="evp-modal__reg-btn" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
+                🚀 Register Now
+              </a>
+            </div>
+          )}
+
+          <p className="evp-modal__counter">
+            Photo {idx + 1} / {count} · Hold image to pause
+          </p>
+        </div>
+
+        {/* Close */}
+        <button className="evp-modal__close" onClick={onClose} aria-label="Close">✕</button>
+      </div>
+
+      <style>{`
+        @keyframes evpProgressGrow {
+          from { width: 0; }
+          to   { width: 100%; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════
+   COMPONENT: HeroEvent (Active/Live event)
+════════════════════════════════════════════════════════════ */
+const HeroEvent = React.memo(function HeroEvent({ event }) {
+  const [imgIdx, setImgIdx] = React.useState(0);
+  const [modalOpen, setModal] = React.useState(false);
+  const imgs = event.images || [];
+
+  return (
+    <>
+      <div className="evp-hero-event" style={{ minHeight: '72vh' }}>
+        {/* Background image */}
+        <img
+          src={imgs[imgIdx] || ''}
+          alt={event.title}
+          className="evp-hero-event__bg"
+        />
+        <div className="evp-hero-event__overlay" />
+
+        {/* Thumbnails */}
+        {imgs.length > 1 && (
+          <div className="evp-hero-event__thumbs">
+            {imgs.map((src, i) => (
+              <button
+                key={i}
+                className={`evp-thumb${i === imgIdx ? ' active' : ''}`}
+                onClick={() => setImgIdx(i)}
+                aria-label={`Preview image ${i + 1}`}
+              >
+                <img src={src} alt="" />
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="evp-hero-event__body">
+          <div className="evp-live-badge">
+            <span />
+            LIVE EVENT
+          </div>
+
+          {event.tags && (
+            <div className="evp-hero-event__tags">
+              {event.tags.map(t => <span key={t} className="evp-tag">{t}</span>)}
+            </div>
+          )}
+
+          <h2 className="evp-hero-event__title">{event.title}</h2>
+
+          <p className="evp-hero-event__desc">{event.description}</p>
+
+          <div className="evp-hero-event__meta">
+            <span>📅 {fmtDate(event.date)}</span>
+            <span>📍 {event.location}</span>
+            {event.attendees && <span>👥 {event.attendees}+ registered</span>}
+          </div>
+
+          <div className="evp-hero-event__actions">
+            {event.registrationLink && (
+              <a href={event.registrationLink} className="evp-btn-primary">
+                🚀 Register Now
+              </a>
+            )}
+            <button className="evp-btn-secondary" onClick={() => setModal(true)}>
+              View Gallery →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {modalOpen && (
+        <EventDetailModal event={event} onClose={() => setModal(false)} />
+      )}
+    </>
+  );
+});
+
+/* ════════════════════════════════════════════════════════════
+   COMPONENT: EventCard
+════════════════════════════════════════════════════════════ */
+const EventCard = React.memo(function EventCard({ event }) {
+  const [modalOpen, setModal] = React.useState(false);
+  const thumb = event.images?.[0] || '';
+  const isPast = event.status === 'past';
+
+  return (
+    <>
+      <article
+        className="evp-card"
+        onClick={() => setModal(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={e => e.key === 'Enter' && setModal(true)}
+        aria-label={`View details for ${event.title}`}
+      >
+        {/* Image */}
+        <div className="evp-card__img-wrap">
+          <img src={thumb} alt={event.title} loading="lazy" />
+          <div className="evp-card__overlay">
+            <div className="evp-card__quick">
+              <span>📅 {fmtDate(event.date)}</span>
+              <span>📍 {event.location}</span>
+            </div>
+          </div>
+          {isPast && <span className="evp-card__badge" style={{ background: '#64748b' }}>Past</span>}
+          {!isPast && <span className="evp-card__badge">Upcoming</span>}
+          {event.images?.length > 1 && (
+            <span className="evp-card__photo-count">{event.images.length} photos</span>
+          )}
+        </div>
+
+        {/* Body */}
+        <div className="evp-card__body">
+          {event.tags && (
+            <div className="evp-card__tags">
+              {event.tags.slice(0, 2).map(t => <span key={t} className="evp-card__tag">{t}</span>)}
+            </div>
+          )}
+          <h3 className="evp-card__title">{event.title}</h3>
+          <p className="evp-card__desc">{event.description}</p>
+
+          <div className="evp-card__footer">
+            <div className="evp-card__meta-small">
+              {event.attendees && <span>👥 {event.attendees}+</span>}
+            </div>
+            <span className="evp-card__cta">View Story →</span>
+          </div>
+        </div>
+      </article>
+
+      {modalOpen && (
+        <EventDetailModal event={event} onClose={() => setModal(false)} />
+      )}
+    </>
+  );
+});
+
+/* ════════════════════════════════════════════════════════════
+   COMPONENT: EventList (grid section)
+════════════════════════════════════════════════════════════ */
+function EventList({ title, events }) {
+  const gridRef = React.useRef(null);
+  useScrollReveal(gridRef);
+
+  return (
+    <section>
+      <div className="evp-section-head">
+        <h2>{title}</h2>
+        <span className="evp-count-badge">{events.length} events</span>
+      </div>
+
+      {events.length === 0 ? (
+        <p className="evp-empty">No events found.</p>
+      ) : (
+        <div className="evp-grid" ref={gridRef}>
+          {events.map(e => <EventCard key={e.id} event={e} />)}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════
+   COMPONENT: FilterBar
+════════════════════════════════════════════════════════════ */
+function FilterBar({ query, onQuery, filter, onFilter }) {
+  const PILLS = [
+    { label: 'All Events', value: 'all' },
+    { label: 'Upcoming', value: 'upcoming' },
+    { label: 'Past', value: 'past' },
   ];
 
-  const filterBtn = document.getElementById("filterBtn");
-  const filtersPanel = document.getElementById("filtersPanel");
-
-  // Get all radio buttons with the name "adminLevelFilter"
-  const adminLevelFilters = document.querySelectorAll(
-    'input[name="adminLevelFilter"]'
+  return (
+    <div className="evp-toolbar">
+      <div className="evp-search-wrap">
+        <span className="evp-search-icon">⌕</span>
+        <input
+          type="text"
+          value={query}
+          onChange={e => onQuery(e.target.value)}
+          placeholder="Search events…"
+          aria-label="Search events"
+        />
+      </div>
+      <div className="evp-filter-pills">
+        {PILLS.map(p => (
+          <button
+            key={p.value}
+            className={`evp-pill${filter === p.value ? ' active' : ''}`}
+            onClick={() => onFilter(p.value)}
+            aria-pressed={filter === p.value}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+    </div>
   );
+}
 
-  function normalize(text) {
-    return (text || "").toString().toLowerCase().trim();
-  }
+/* ════════════════════════════════════════════════════════════
+   COMPONENT: HeroSection (canvas + heading)
+════════════════════════════════════════════════════════════ */
+function HeroSection() {
+  const canvasRef = React.useRef(null);
 
-  function applyFilters() {
-    const term = normalize(searchInput.value);
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const colors = ['#24a0ba', '#31b2cc', '#79d8eb', '#157e91'];
+    let points = [];
+    let mouse = { x: 0, y: 0 };
+    let raf;
 
-    // Find the currently selected admin level (radio button)
-    const selectedAdminLevelElement = document.querySelector(
-      'input[name="adminLevelFilter"]:checked'
-    );
-    const selectedAdminLevel = selectedAdminLevelElement
-      ? parseInt(selectedAdminLevelElement.value, 10)
-      : null;
-
-    let visibleCardsCount = 0;
-
-    allCards().forEach((card) => {
-      const name = normalize(card.getAttribute("data-name"));
-      const adminLevel = parseInt(card.getAttribute("data-admin-level"), 10);
-
-      const matchesText = !term || name.includes(term);
-
-      // If no admin level is selected (shouldn't happen with default, but good for robustness)
-      // or if the card's admin level matches the selected one.
-      const matchesAdminLevel =
-        selectedAdminLevel === null || adminLevel === selectedAdminLevel;
-
-      const isVisible = matchesText && matchesAdminLevel;
-      card.style.display = isVisible ? "" : "none";
-
-      if (isVisible) {
-        visibleCardsCount++;
+    class Point {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.9;
+        this.vy = (Math.random() - 0.5) * 0.9;
+        this.r = Math.random() * 220 + 100;
+        this.c = colors[Math.floor(Math.random() * colors.length)];
       }
-    });
-
-    // Update the brand badge with the selected admin level, or default to "10" if nothing is checked
-    brandBadge.textContent = selectedAdminLevelElement
-      ? selectedAdminLevelElement.value
-      : "10";
-  }
-
-  // Attach event listeners for all admin level radio buttons
-  adminLevelFilters.forEach((radio) => {
-    radio.addEventListener("change", applyFilters);
-  });
-
-  searchInput.addEventListener("input", applyFilters);
-
-  filterBtn.addEventListener("click", () => {
-    filtersPanel.classList.toggle("visible");
-  });
-
-  // Initial application of filters to show events for default "10" and set badge
-  applyFilters();
-
-  // --- Modal and Image Slider Logic ---
-  (function () {
-    const modal = document.getElementById("eventModal");
-    const modalBody = document.getElementById("modalBody");
-    const closeBtn = modal.querySelector(".close");
-
-    const modalTitle = modalBody.querySelector(".modal-title");
-    const modalImage = modalBody.querySelector(".modal-image");
-    const modalFullDescription = modalBody.querySelector(
-      ".modal-full-description"
-    );
-    const modalExtraDetailDescription = modalBody.querySelector(
-      ".modal-extra-detail-description"
-    );
-    const modalMetaDetails = modalBody.querySelector(".modal-meta-details");
-    const modalBookBtn = modalBody.querySelector(".modal-cta .btn-book");
-    const sliderPrevBtn = modalBody.querySelector(".slider-prev");
-    const sliderNextBtn = modalBody.querySelector(".slider-next");
-    const sliderDotsContainer = modalBody.querySelector(".slider-dots");
-
-    let currentImageIndex = 0;
-    let currentImages = [];
-
-    function updateSlider() {
-      if (currentImages.length === 0) {
-        modalImage.src = "";
-        modalImage.style.display = "none";
-        sliderPrevBtn.style.display = "none";
-        sliderNextBtn.style.display = "none";
-        sliderDotsContainer.innerHTML = "";
-        return;
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < -this.r) this.x = canvas.width + this.r;
+        if (this.x > canvas.width + this.r) this.x = -this.r;
+        if (this.y < -this.r) this.y = canvas.height + this.r;
+        if (this.y > canvas.height + this.r) this.y = -this.r;
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        if (Math.hypot(dx, dy) < 500) { this.x += dx * 0.005; this.y += dy * 0.005; }
       }
-
-      modalImage.style.display = "block";
-      modalImage.src = currentImages[currentImageIndex];
-
-      sliderDotsContainer.innerHTML = "";
-      if (currentImages.length > 1) {
-        currentImages.forEach((_, index) => {
-          const dot = document.createElement("div");
-          dot.classList.add("slider-dot");
-          if (index === currentImageIndex) {
-            dot.classList.add("active");
-          }
-          dot.addEventListener("click", () => {
-            currentImageIndex = index;
-            updateSlider();
-          });
-          sliderDotsContainer.appendChild(dot);
-        });
-        sliderPrevBtn.style.display = "block";
-        sliderNextBtn.style.display = "block";
-      } else {
-        sliderPrevBtn.style.display = "none";
-        sliderNextBtn.style.display = "none";
+      draw() {
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+        g.addColorStop(0, this.c + 'aa');
+        g.addColorStop(1, this.c + '00');
+        ctx.globalCompositeOperation = 'screen';
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
-    sliderPrevBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentImageIndex =
-        (currentImageIndex - 1 + currentImages.length) % currentImages.length;
-      updateSlider();
-    });
-
-    sliderNextBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentImageIndex = (currentImageIndex + 1) % currentImages.length;
-      updateSlider();
-    });
-
-    document.querySelectorAll(".card").forEach((card) => {
-      card.addEventListener("click", () => {
-        const title = card.querySelector(".title").textContent;
-        const fullDescription = card.getAttribute("data-full-description");
-        const extraDetailDescription = card.getAttribute("data-extra-detail-description");
-        const imagesString = card.getAttribute("data-images");
-        const eventType = card.getAttribute("data-event-type");
-        const eventName = card.getAttribute("data-name") || title.toLowerCase();
-
-        const metaItemsToClone = Array.from(
-          card.querySelectorAll(".meta-item")
-        ).filter((item) => {
-          const label = item
-            .querySelector(".label")
-            .textContent.trim()
-            .toUpperCase();
-          return label !== "TIME" && label !== "COST";
-        });
-
-        modalTitle.textContent = title;
-        
-        // Set extra detail description if available, otherwise show full description
-        if (extraDetailDescription && extraDetailDescription.trim()) {
-          modalFullDescription.style.display = "none";
-          modalExtraDetailDescription.textContent = extraDetailDescription;
-          modalExtraDetailDescription.style.display = "block";
-        } else {
-          modalFullDescription.textContent = fullDescription;
-          modalFullDescription.style.display = "block";
-          modalExtraDetailDescription.style.display = "none";
-        }
-
-        currentImages = imagesString ? imagesString.split(",") : [];
-        currentImageIndex = 0;
-        updateSlider();
-
-        modalMetaDetails.innerHTML = "";
-        metaItemsToClone.forEach((item) => {
-          const clone = item.cloneNode(true);
-          modalMetaDetails.appendChild(clone);
-        });
-
-        // Show/hide Register button only for the 2 current upcoming events (Hackathon and Camp 4)
-        const hackathonKeywords = ["hackathon", "هاكاثون"];
-        const camp4Keywords = ["مخيم عينك على ذاتك 4", "camp"];
-        
-        const isHackathon = hackathonKeywords.some(keyword => 
-          eventName.toLowerCase().includes(keyword.toLowerCase()) || 
-          title.toLowerCase().includes(keyword.toLowerCase())
-        );
-        
-        const isCamp4 = eventName.includes("مخيم عينك على ذاتك 4") || 
-                       title.includes("مخيم عينك على ذاتك 4");
-        
-        if (isHackathon || isCamp4) {
-          modalBookBtn.style.display = "block";
-          
-          if (isHackathon) {
-            modalBookBtn.onclick = (e) => {
-              e.stopPropagation();
-              window.location.href = "hack.html";
-            };
-            modalBookBtn.textContent = "Register";
-          } else if (isCamp4) {
-            modalBookBtn.onclick = (e) => {
-              e.stopPropagation();
-              window.location.href = "aincamp.html";
-            };
-            modalBookBtn.textContent = "Register";
-          }
-        } else {
-          // Hide Register button for all other events
-          modalBookBtn.style.display = "none";
-        }
-
-        modal.style.display = "block";
-      });
-    });
-
-    closeBtn.onclick = () => {
-      modal.style.display = "none";
-    };
-
-    window.onclick = (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    };
-  })();
-
-  // --- Bubble Background Animation for Events Header ---
-  (function () {
-    const canvas = document.getElementById("events-header-canvas");
-    if (!canvas) {
-      console.warn("Events header canvas element not found.");
-      return;
-    }
-    const ctx = canvas.getContext("2d");
-    let bubbles = [];
-    const bubbleCount = 15; // Number of bubbles
-
-    // Function to resize canvas
-    function resizeCanvas() {
+    function resize() {
       canvas.width = canvas.parentElement.offsetWidth;
       canvas.height = canvas.parentElement.offsetHeight;
-
-      // Re-initialize bubbles on resize
-      bubbles = [];
-      for (let i = 0; i < bubbleCount; i++) {
-        bubbles.push(new Bubble());
-      }
+      points = Array.from({ length: 15 }, () => new Point());
     }
 
-    // Bubble class
-    class Bubble {
-      constructor() {
-        this.reset();
-        this.y = Math.random() * canvas.height; // Start at random height
-      }
-
-      reset() {
-        this.radius = Math.random() * 30 + 10; // Bubble size between 10-40px
-        this.x = Math.random() * canvas.width;
-        this.y = canvas.height + this.radius; // Start below the canvas
-        this.speed = Math.random() * 1 + 0.5; // Speed between 0.5-1.5
-        this.opacity = Math.random() * 0.3 + 0.1; // Opacity between 0.1-0.4
-        this.wobble = Math.random() * 2; // Wobble effect
-        this.wobbleSpeed = Math.random() * 0.05 + 0.02;
-      }
-
-      update() {
-        this.y -= this.speed;
-        this.x += Math.sin(this.wobble) * 0.5; // Gentle side-to-side movement
-        this.wobble += this.wobbleSpeed;
-
-        // If bubble goes above top, reset it to bottom
-        if (this.y < -this.radius) {
-          this.reset();
-        }
-      }
-
-      draw() {
-        // Bubble glow/shadow
-        ctx.shadowColor = "rgba(255, 255, 255, 0.3)";
-        ctx.shadowBlur = 10;
-
-        // Bubble fill
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Bubble highlight
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity + 0.2})`;
-        ctx.beginPath();
-        ctx.arc(
-          this.x - this.radius * 0.3,
-          this.y - this.radius * 0.3,
-          this.radius * 0.3,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
-      }
-    }
-
-    // Initialize bubbles
-    function init() {
-      resizeCanvas();
-      for (let i = 0; i < bubbleCount; i++) {
-        bubbles.push(new Bubble());
-      }
-      animate();
-    }
-
-    // Animation loop
     function animate() {
-      requestAnimationFrame(animate);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw all bubbles
-      for (let i = 0; i < bubbles.length; i++) {
-        bubbles[i].update();
-        bubbles[i].draw();
-      }
+      ctx.fillStyle = '#1a8ca3';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'screen';
+      points.forEach(p => { p.update(); p.draw(); });
+      raf = requestAnimationFrame(animate);
     }
 
-    // Event listener for window resize
-    window.addEventListener("resize", resizeCanvas);
+    const onMove = e => {
+      const rect = canvas.getBoundingClientRect();
+      mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
 
-    // Start the animation when the page loads
-    window.addEventListener("load", init);
+    resize();
+    animate();
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', onMove);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMove);
+    };
+  }, []);
 
-    // Also start if the canvas is already loaded
-    if (canvas.complete) {
-      init();
-    }
-  })();
+  return (
+    <header className="evp-hero" aria-label="Events hero section">
+      <canvas id="evp-canvas" ref={canvasRef} />
+      <div className="evp-hero-content">
+        <h1>Our Events</h1>
+        <p>From innovation hackathons to self-development camps — every event shapes the future.</p>
+      </div>
+    </header>
+  );
+}
 
-  // Open modal for event when query parameter is present
-  function openEventModal() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventParam = urlParams.get('event');
-    
-    if (eventParam) {
-      // Map event names to IDs or data-name attributes
-      const eventMap = {
-        'camp': 'camp',
-        'exhibition': 'exhibition',
-        'hackathon': 'hackathon'
-      };
-      
-      const eventId = eventMap[eventParam];
-      if (eventId) {
-        // Find the card by ID or data-name
-        const targetCard = document.querySelector(`#${eventId}`) || 
-                          document.querySelector(`[data-name*="${eventId}" i]`);
-        
-        if (targetCard) {
-          setTimeout(() => {
-            // Trigger click on the card to open modal
-            targetCard.click();
-          }, 500);
-        }
-      }
-    }
-  }
+/* ════════════════════════════════════════════════════════════
+   ROOT APP COMPONENT
+════════════════════════════════════════════════════════════ */
+function EventsApp() {
+  const [query, setQuery] = React.useState('');
+  const [filter, setFilter] = React.useState('all');
 
-  // Smooth scroll to event when hash is present
-  function scrollToEvent() {
-    const hash = window.location.hash;
-    if (hash) {
-      const targetElement = document.querySelector(hash);
-      if (targetElement) {
-        setTimeout(() => {
-          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Add a highlight effect
-          targetElement.style.transition = 'box-shadow 0.3s ease';
-          targetElement.style.boxShadow = '0 0 20px rgba(49, 178, 204, 0.5)';
-          setTimeout(() => {
-            targetElement.style.boxShadow = '';
-          }, 2000);
-        }, 500);
-      }
-    }
-  }
+  const { active, upcoming, past } = React.useMemo(() => sortEvents(EVENTS), []);
 
-  // Run on page load
-  window.addEventListener('load', function() {
-    openEventModal();
-    scrollToEvent();
-  });
-  
-  // Also run if hash changes (e.g., when clicking links)
-  window.addEventListener('hashchange', scrollToEvent);
-})();
+  const search = (arr) => {
+    const t = query.toLowerCase().trim();
+    if (!t) return arr;
+    return arr.filter(e =>
+      e.title.toLowerCase().includes(t) ||
+      e.description.toLowerCase().includes(t) ||
+      (e.tags || []).some(g => g.toLowerCase().includes(t))
+    );
+  };
+
+  const shownUpcoming = filter !== 'past' ? search(upcoming) : [];
+  const shownPast = filter !== 'upcoming' ? search(past) : [];
+
+  return (
+    <>
+      <HeroSection />
+      <div className="evp-page">
+        {/* Active / Hero event */}
+        {active && filter === 'all' && (
+          <section style={{ marginBottom: '4rem' }}>
+            <div className="evp-section-head" style={{ marginTop: 0 }}>
+              <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <span style={{
+                  fontSize: '0.65rem', background: '#dc2626', color: 'white',
+                  padding: '0.3rem 0.7rem', borderRadius: '99px',
+                  fontWeight: 800, letterSpacing: '0.1em',
+                }}>LIVE</span>
+                Active Event
+              </h2>
+            </div>
+            <HeroEvent event={active} />
+          </section>
+        )}
+
+        {/* Filter bar */}
+        <FilterBar query={query} onQuery={setQuery} filter={filter} onFilter={setFilter} />
+
+        {/* Upcoming */}
+        {filter !== 'past' && (
+          <EventList title="Upcoming Events" events={shownUpcoming} />
+        )}
+
+        {/* Past */}
+        {filter !== 'upcoming' && (
+          <EventList title="Past Events" events={shownPast} />
+        )}
+      </div>
+    </>
+  );
+}
+
+/* ─── Mount React ────────────────────────────────────────── */
+const root = ReactDOM.createRoot(document.getElementById('events-root'));
+root.render(React.createElement(EventsApp));
