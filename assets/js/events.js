@@ -11,16 +11,14 @@
 const EVENTS = [
   {
     id: 'hackathon-2025',
-    title: 'AIN Hackathon 2025',
-    date: '2025-12-01',
+    title: 'AIN Hackathon 2026',
+    date: '2026-5-1',
     location: 'An-Najah University, Nablus',
     status: 'active',
     description: 'The flagship hackathon — 48 hours of ideas, code, and breakthrough innovation.',
     fullDescription: 'Join teams of passionate students for a 48-hour sprint of building, prototyping, and pitching ideas that matter. Mentored by industry experts, judged by innovators, and witnessed by the entire AIN community.',
     images: [
-      'https://picsum.photos/seed/hack1/1200/800',
-      'https://picsum.photos/seed/hack2/1200/800',
-      'https://picsum.photos/seed/hack3/1200/800',
+      '/images/'
     ],
     registrationLink: '/hack.html',
     tags: ['Tech', 'Innovation', 'Competition'],
@@ -50,7 +48,18 @@ const EVENTS = [
     location: 'An-Najah University',
     status: 'past',
     description: 'An immersive escape-room experience celebrating creativity, teamwork, and fast thinking.',
-    fullDescription: '🧩 Escape To AIN 2 — رحلة البحث عن الجوهرة المفقودة. A fully themed campus escape game drawing more than 150 participants in a single day.',
+    fullDescription: `
+    ‏🧩 Escape To AIN 2, رحلة البحث عن الجوهرة المفقودة\n
+
+‏في يوم السبت 11 تشرين الأول 2025، نظّمت الشبكة العربية للابتكار–عين فعالية Escape To AIN 2 في جامعة النجاح الوطنية–الحرم الجديد، تحديدًا في كلية الهندسة والعلوم وملاعب كلية الرياضة، من الساعة 9 صباحًا حتى 5 مساءً.
+
+‏حملت الفعالية هذا العام عنوان “العثور على الجوهرة المفقودة”، وشارك فيها 100 طالب موزعين على 25 فريقًا، خاضوا تجربة مليئة بالحماس والتحدي عبر سبع غرف متتالية من الألغاز والاختبارات الذهنية.
+‏في كل غرفة، كان على الفرق حل سلسلة من الألغاز لجمع بطاقات تحمل تلميحات عن موقع الجوهرة، حتى يتمكن الفريق الذي يجمع البطاقات السبع من اكتشاف المكان النهائي للجوهرة والفوز بالسباق الكبير 🏆.
+
+‏تخلّل النشاط استراحة للغداء والصلاة في ساحة النافورة–مبنى العلوم B2، قبل استكمال المنافسة في الأجواء الممتعة.
+
+‏وشهد الافتتاح لحظة مؤثرة بإلقاء قصيدة شعرية بمناسبة انتهاء الحرب في غزة، كما تم خلال الفعالية تكريم متطوعي تحدي الثلاثين تقديرًا لعطائهم.
+‏واختُتم اليوم بتكريم الفريقين الفائزين بالمركزين الأول والثاني بمكافآت مالية، إضافةً إلى توزيع هدايا وكوبونات على جميع المشاركين، وسط أجواء من الفخر والإنجاز والروح الإيجابية.`,
     extraDescription: 'Teams raced through four rooms of cryptic clues, logic puzzles, and hidden codes, each unlocking a piece of the story.',
     images: ['/images/ESCP1.jpg', '/images/ESCP2.jpg', '/images/ESCP3.jpg'],
     tags: ['Games', 'Teamwork'],
@@ -75,43 +84,48 @@ const EVENTS = [
     location: 'An-Najah University',
     status: 'past',
     description: 'An exploration of university majors and career paths, showcasing the breadth of innovation.',
-    fullDescription: 'معرض عين للتعريف عن التخصصات الجامعية وفرص المستقبل.',
+    fullDescription:
+      "عين على المستقبل" + `
+وهو معرض طلابي شامل جمع بين الإبداع العلمي والابتكار العملي في مختلف التخصصات. أقيمت الفعالية بإشراف عمادة شؤون الطلبة وحديقة النجاح للابتكار، واستمرّت على مدار يومين في ساحة كلية الهندسة بالحرم الجديد، وسط حضور واسع من الطلبة والأكاديميين والإداريين.
+ضمّ المعرض عشرات الزوايا التفاعلية التي عرض فيها الطلبة مشاريعهم وأفكارهم الريادية في مجالات الهندسة، والطب، والاقتصاد، والتكنولوجيا، والفنون، وغيرها، ليقدّم صورة حيّة عن طاقات الشباب وقدرتهم على الابتكار وصناعة التغيير.
+جاءت الفعالية لتجسد رؤية الجامعة في دعم أهداف التنمية المستدامة، وتعزيز الشراكة بين الطلبة والجهات الداعمة للابتكار، فكانت بحق نافذة تطل على المستقبل وتُعبّر عن روح الريادة في جامعة النجاح الوطنية.
+    `,
     images: ['/images/EXB1.jpg', '/images/EXB2.jpg', '/images/EXB3.jpg'],
     tags: ['Exhibition', 'Careers'],
   },
-  {
-    id: 'ain-camp-3',
-    title: 'مخيم عينك على ذاتك 3',
-    date: '2025-09-22',
-    location: 'City Hub',
-    status: 'past',
-    description: 'Third edition of the flagship self-development camp for AIN members.',
-    fullDescription: 'مخيم عينك على ذاتك 3 — النسخة الثالثة من المخيم التطويري الرائد لأعضاء عين.',
-    images: ['/images/CAMP1.jpg', '/images/CAMP4.jpg', '/images/CAMP5.jpg'],
-    tags: ['Self-Development'],
-  },
-  {
-    id: 'ain-network-exhibition',
-    title: 'معرض الشبكة العربية للابتكار',
-    date: '2025-04-22',
-    location: 'City Hub',
-    status: 'past',
-    description: 'Annual showcase of the Arab Innovation Network across Palestine.',
-    fullDescription: 'معرض الشبكة العربية للابتكار — عرض سنوي لمنجزات الشبكة في فلسطين.',
-    images: ['/images/EXB11.jpg', '/images/EXB12.jpg'],
-    tags: ['Exhibition', 'Network'],
-  },
-  {
-    id: 'wamdah',
-    title: 'ومضة',
-    date: '2025-03-15',
-    location: 'City Hub',
-    status: 'past',
-    description: 'Lightning talks — rapid 5-minute ideas from the brightest student innovators.',
-    fullDescription: 'ومضة: منصة أفكار سريعة ومُلهِمة من أبرز المبتكرين الطلابيين في فلسطين.',
-    images: ['/images/WAMDAH1.jpg', '/images/WAMDAH2.jpg'],
-    tags: ['Talks', 'Innovation'],
-  },
+  // {
+  //   id: 'ain-camp-3',
+  //   title: 'مخيم عينك على ذاتك 3',
+  //   date: '2023-10-5',
+  //   location: 'جبل النجمة - رام الله',
+  //   status: 'past',
+  //   description: 'Third edition of the flagship self-development camp for AIN members.',
+  //   fullDescription: 'مخيم عينك على ذاتك 3 — النسخة الثالثة من المخيم التطويري الرائد لأعضاء عين.',
+  //   images: ['/images/CAMP1.jpg', '/images/CAMP4.jpg', '/images/CAMP5.jpg'],
+  //   tags: ['Self-Development'],
+  // },
+  // {
+  //   id: 'ain-network-exhibition',
+  //   title: 'معرض الشبكة العربية للابتكار',
+  //   date: '2023-09-22',
+  //   location: 'City Hub',
+  //   status: 'past',
+  //   description: 'Annual showcase of the Arab Innovation Network across Palestine.',
+  //   fullDescription: 'معرض الشبكة العربية للابتكار — عرض سنوي لمنجزات الشبكة في فلسطين.',
+  //   images: ['/images/EXB11.jpg', '/images/EXB12.jpg'],
+  //   tags: ['Exhibition', 'Network'],
+  // },
+  // {
+  //   id: 'wamdah',
+  //   title: 'ومضة',
+  //   date: '2023-03-15',
+  //   location: 'City Hub',
+  //   status: 'past',
+  //   description: 'Lightning talks — rapid 5-minute ideas from the brightest student innovators.',
+  //   fullDescription: 'ومضة: منصة أفكار سريعة ومُلهِمة من أبرز المبتكرين الطلابيين في فلسطين.',
+  //   images: ['/images/WAMDAH1.jpg', '/images/WAMDAH2.jpg'],
+  //   tags: ['Talks', 'Innovation'],
+  // },
 ];
 
 /* ─── Sorting utility ──────────────────────────────────────── */
@@ -643,8 +657,22 @@ function HeroSection() {
 function EventsApp() {
   const [query, setQuery] = React.useState('');
   const [filter, setFilter] = React.useState('all');
+  const [deepLinkEvent, setDeepLink] = React.useState(null);
 
   const { active, upcoming, past } = React.useMemo(() => sortEvents(EVENTS), []);
+
+  // Deep-link: /events.html#event-id → auto-open that event's modal
+  React.useEffect(() => {
+    function handleHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (!hash) { setDeepLink(null); return; }
+      const found = EVENTS.find(e => e.id === hash);
+      if (found) setTimeout(() => setDeepLink(found), 300);
+    }
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   const search = (arr) => {
     const t = query.toLowerCase().trim();
@@ -693,6 +721,17 @@ function EventsApp() {
           <EventList title="Past Events" events={shownPast} />
         )}
       </div>
+
+      {/* Deep-link modal — opened automatically when URL has #event-id */}
+      {deepLinkEvent && (
+        <EventDetailModal
+          event={deepLinkEvent}
+          onClose={() => {
+            setDeepLink(null);
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }}
+        />
+      )}
     </>
   );
 }

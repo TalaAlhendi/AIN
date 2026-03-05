@@ -756,4 +756,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // تهيئة الصور والتأثيرات
     initializePage();
 });
-
